@@ -95,7 +95,8 @@ trait Operations {
 	public function delete($table,$id){
 		$val = false;
 		  try {
-		  	$qry = $this->con->prepare("DELETE FROM `".$table."` WHERE ".$id."");
+			$sql = "DELETE FROM `".$table."` WHERE ".$id."";
+		  	$qry = $this->con->prepare($sql);
 		    $val = $qry->execute();
 		  } catch (PDOException $e ) {
 			echo $sql . "<br>" . $e->getMessage();

@@ -18,3 +18,25 @@ $router->post('/registration', function($request) {
     return $auth->registration($request[0]->getBody());
 });
 
+
+
+// categories routes
+$router->get('/categories', function() {
+    $categories = new \App\Controller\CategoryController();
+    return $categories->index();
+});
+$router->post('/categories/store', function($request) {
+    $categories = new \App\Controller\CategoryController();
+    return $categories->store($request[0]->getBody());
+});
+$router->post('/categories/update', function($request) {
+    $categories = new \App\Controller\CategoryController();
+    return $categories->updateData($request[0]->getBody());
+});
+$router->post('/categories/delete', function($request) {
+    $categories = new \App\Controller\CategoryController();
+    return $categories->destroy($request[0]->getBody());
+});
+// end of categories
+
+
