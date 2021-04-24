@@ -43,11 +43,16 @@ class CategoryController extends Controller {
             ]);
         }
         $category = $this->joinQuery('SELECT * FROM `categories` WHERE id="'.$dataLog['id'].'" LIMIT 1')->fetch(\PDO::FETCH_ASSOC);
-        if ($category['name']) {
+        if (isset($category['name'])) {
             return json_encode([
                 'status' => true,
                 'data'   => $category
             ]);
+        } else {
+            return json_encode([
+                'status' => true,
+                'data'   => 'Data not found'
+            ]);  
         }
     }
 
