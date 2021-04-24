@@ -1,4 +1,14 @@
 {
+    "name": "atik/wedevs-assignment",
+    "type": "project",
+    "description": "Assignment type project",
+    "keywords": [
+        "MVC",
+        "Assignment",
+        "PHP",
+        "Mysql"
+    ],
+    "license": "MIT",
     "require": {
         "vlucas/phpdotenv": "^5.3"
     },
