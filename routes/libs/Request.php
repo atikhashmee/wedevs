@@ -5,6 +5,7 @@ include_once 'IRequest.php';
 class Request implements IRequest {
 
     public function __construct() {
+        header('Access-Control-Allow-Origin: *');
         $this->bootstrapSelf();
     }
 

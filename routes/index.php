@@ -5,6 +5,7 @@ require_once 'libs/Route.php';
 
 $router = new Route(new Request());
 $router->get('/', function(){
+    
     return "hello world";
 });
 
@@ -66,4 +67,7 @@ $router->post('/products/delete', function($request) {
     return $categories->destroy($request[0]->getBody());
 });
 // end products
+
+
+
 
