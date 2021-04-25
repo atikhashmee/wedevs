@@ -82,4 +82,20 @@ class AuthController extends Controller {
             ]);
         }
     }
+
+    public function logout($logData) {
+        if (isset($logData['id']) && empty($logData['id'])) {
+            return json_encode([
+                'status' => false,
+                'data'   => 'User ID can not be null'
+            ]);
+        }
+        $updated = $this->update('users', ['auth_token'=> null], 'id="'.$logData['id'].'"');
+        if ($updated) {
+            return json_encode([
+                'status' => true,
+                'data'   => 'Successfully logged out'
+            ]);
+        }
+    }
 }

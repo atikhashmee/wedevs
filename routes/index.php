@@ -18,6 +18,10 @@ $router->post('/registration', function($request) {
     $auth = new \App\Controller\AuthController();
     return $auth->registration($request[0]->getBody());
 });
+$router->post('/logout', function($request) {
+    $auth = new \App\Controller\AuthController();
+    return $auth->logout($request[0]->getBody());
+});
 
 
 
