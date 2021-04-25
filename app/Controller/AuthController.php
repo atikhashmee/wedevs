@@ -33,7 +33,7 @@ class AuthController extends Controller {
         $user = $this->joinQuery('SELECT * FROM users WHERE username="'.$logData['username'].'" AND password="'.md5($logData['password']).'" LIMIT 1')->fetch(\PDO::FETCH_ASSOC);
         if (isset($user['username'])) {
             $auth_token = rand(1000,10000);
-            $user['token'] = $auth_token;
+            $user['auth_token'] = $auth_token;
             $this->update('users', ['auth_token'=> $auth_token], 'id="'.$user['id'].'"');
             return json_encode([
                 'status' => true,
