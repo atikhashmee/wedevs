@@ -7,12 +7,25 @@ class OrderController extends Controller {
         parent::__construct();
     }
 
-    public function index() {
-        if (auth_check($token)) {
-            $results = $this->selectAll('orders')->fetchAll();
-            return json_encode(['status'=> true, 'data'=>$results]);
-        } else {
-            return json_encode(['status'=> false, 'data'=>'Session expired, please sign in']);
+    public function index($dataLog) {
+        try {
+            if (isset($logData['auth_token']) && empty($logData['auth_token'])) {
+                throw new \Exception("No auth token", 1);
+            }
+            $user = $this->joinQuery('SELECT * FROM `users` WHERE `auth_token`="'.$dataLog['auth_token'].'"')->fetch(\PDO::FETCH_ASSOC);
+            if (!isset($user['username'])) {
+                throw new \Exception("token expired", 1);
+            }
+            if ($user['role'] == 'admin') {
+                $products_sql = "SELECT orders.*, users.username FROM `orders` 
+                INNER JOIN users ON users.id = orders.user_id";
+                $sqlResult = $this->joinQuery($products_sql);
+            } else if ($user['role'] == 'user') {
+                $sqlResult = $this->selectAll('orders', 'user_id = "'.$user['id'].'"');
+            }
+            return json_encode(['status'=> true, 'data'=> $sqlResult->fetchAll(\PDO::FETCH_ASSOC)]);
+        } catch (\Exception $e) {
+            return json_encode(['status'=> false, 'data'=> $e->getMessage()]);
         }
     }
 
@@ -34,7 +47,7 @@ class OrderController extends Controller {
             $order_insert = [
                 'payment_method'=> $dataLog['payment_method'],
                 'charge' => $total_charge,
-                'user_id' => $total_charge,
+                'user_id' => $user['id'],
                 'status' => 'Processing',
                 'payment_status' => 'not_paid',
                 'tracking_id' => uniqid('or-'),
