@@ -72,6 +72,10 @@ $router->post('/products/delete', function($request) {
 });
 // end products
 
-
+// orders
+$router->post('/order/store', function($request) {
+    $categories = new \App\Controller\OrderController();
+    return $categories->store($request[0]->getBody());
+});
 
 
