@@ -5,7 +5,6 @@ require_once 'libs/Route.php';
 
 $router = new Route(new Request());
 $router->get('/', function(){
-    
     return "hello world";
 });
 
@@ -54,7 +53,7 @@ $router->post('/categories/delete', function($request) {
 
 
 // products
-$router->get('/products/index', function() {
+$router->get('/products/index', function($request) {
     $products = new \App\Controller\ProductController();
     return $products->index();
 });

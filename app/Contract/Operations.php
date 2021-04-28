@@ -92,7 +92,7 @@ trait Operations {
 		
 		return $qry;
 	}
-	public function delete($table,$id){
+	public function delete($table,$id) {
 		$val = false;
 		  try {
 			$sql = "DELETE FROM `".$table."` WHERE ".$id."";
