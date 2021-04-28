@@ -1,12 +1,15 @@
-                       ***Project Run***
+Welcome to the wedevs wiki!
 
-                       clone the project 
-                       git clone github link
-                       run the command composer install
-                       then import the db file from ....
-                       create a file called .env
-                       copy content from .env.example 
-                       change the db name
-                       and finally run the project by 
-                       php -S localhost:6000
-                       hit the browser with the link
+This project functions to features
+     
+*  Token based auth
+*  Category
+*  products
+*  Orders
+*  users
+
+Very simple to use 
+
+Clone the project using bellow command
+
+`git clone https://github.com/atikhashmee/wedevs.git`
