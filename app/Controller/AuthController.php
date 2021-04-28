@@ -15,6 +15,14 @@ class AuthController extends Controller {
         return json_encode($this->con);
     }
 
+    public function  getUsers() {
+        $users = $this->selectAll('users', 'role!="admin"')->fetchAll(\PDO::FETCH_ASSOC);
+        return json_encode([
+            'status' => true, 
+            'data' => $users
+        ]);
+    }
+
     public function login($logData) {
         if (isset($logData['username']) && empty($logData['username'])) {
             return json_encode([

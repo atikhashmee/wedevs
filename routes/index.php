@@ -9,6 +9,7 @@ $router->get('/', function(){
     return "hello world";
 });
 
+//user and auth
 $router->post('/login', function($request){
     $auth = new \App\Controller\AuthController();
     return $auth->login($request[0]->getBody());
@@ -22,7 +23,10 @@ $router->post('/logout', function($request) {
     $auth = new \App\Controller\AuthController();
     return $auth->logout($request[0]->getBody());
 });
-
+$router->get('/users', function($request){
+    $auth = new \App\Controller\AuthController();
+    return $auth->getUsers();
+});
 
 
 // categories routes
@@ -71,6 +75,7 @@ $router->post('/products/delete', function($request) {
     return $categories->destroy($request[0]->getBody());
 });
 // end products
+
 
 // orders
 $router->post('/order/index', function($request) {
