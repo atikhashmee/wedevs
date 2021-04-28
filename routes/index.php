@@ -81,5 +81,9 @@ $router->post('/order/store', function($request) {
     $categories = new \App\Controller\OrderController();
     return $categories->store($request[0]->getBody());
 });
+$router->post('/order/show', function($request) {
+    $categories = new \App\Controller\OrderController();
+    return $categories->show($request[0]->getBody());
+});
 
 

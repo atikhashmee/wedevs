@@ -85,20 +85,23 @@ class OrderController extends Controller {
         return json_encode($products);
     }
 
-
-    public function create() {
-
-    }
-
-    public function edit() {
-
-    }
-
-    public function updateData() {
-
-    }
-
-    public function destroy() {
-        
+    public function show($dataLog) {
+       try {
+            if (isset($dataLog['order_id']) && empty($dataLog['order_id'])) {
+                throw new Exception("No Order Id", 1);
+            }
+            $order_sql = "SELECT * FROM orders INNER JOIN order_address on order_address.order_id=orders.id WHERE orders.id='".$dataLog['order_id']."'";
+            $orderItemsSql = "SELECT * FROM product_order INNER JOIN products ON products.id = product_order.product_id WHERE product_order.order_id='".$dataLog['order_id']."'";
+            $orderInfo = $this->joinQuery($order_sql)->fetch(\PDO::FETCH_ASSOC);
+            $order_items = $this->joinQuery($orderItemsSql)->fetchAll(\PDO::FETCH_ASSOC);
+            $data['order_info'] = $orderInfo;
+            $data['order_items'] = $order_items;
+            return json_encode([
+                'status' => true, 
+                'data'   => $data
+            ]);
+       } catch (\Exception $e) {
+            return json_encode(['status'=> false, 'data'=> $e->getMessage()]);
+       } 
     }
 }
