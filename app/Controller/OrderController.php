@@ -104,4 +104,22 @@ class OrderController extends Controller {
             return json_encode(['status'=> false, 'data'=> $e->getMessage()]);
        } 
     }
+
+    public function updateData($dataLog) {
+        try {
+            if (isset($dataLog['order_id']) && empty($dataLog['order_id'])) {
+                throw new Exception("No Order Id", 1);
+            }
+            $data['status'] = $dataLog['status'];
+            $updated = $this->update('orders', $data, 'id="'.$dataLog['order_id'].'"');
+            if ($updated) {
+                return json_encode([
+                    'status' => true,
+                    'data'   => 'Data has been updated'
+                ]);
+            }
+        } catch (\Exception $e) {
+            return json_encode(['status'=> false, 'data'=> $e->getMessage()]);
+       } 
+    }
 }
