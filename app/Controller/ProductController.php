@@ -69,6 +69,7 @@ class ProductController extends Controller {
             ]);
         }
         $category = $this->joinQuery('SELECT * FROM `products` WHERE id="'.$dataLog['id'].'" LIMIT 1')->fetch(\PDO::FETCH_ASSOC);
+        $category['image_url'] = 'http://'.$_SERVER['HTTP_HOST'].'/storage/uploads/'.$category['image'];
         if (isset($category['name'])) {
             return json_encode([
                 'status' => true,
