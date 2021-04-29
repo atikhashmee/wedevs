@@ -14,6 +14,10 @@ Clone the project using bellow command
 
 `git clone https://github.com/atikhashmee/wedevs.git`
 
+to install the dependencies.
+
+`composer install`
+
 [download this sql ](https://github.com/atikhashmee/wedevs/tree/master/db)
 
 import it to your PHPMyadmin
@@ -24,7 +28,7 @@ replace database name
 
 run this query  for creating testing admin. so that you can set up your admin panel. 
 
-now go to Project root directory and open the Gitbash or your favourit Command Line
+now go to Project root directory and open the Gitbash or your favorite Command Line
 to run the project 
 
 `php -s localhost:8000`
